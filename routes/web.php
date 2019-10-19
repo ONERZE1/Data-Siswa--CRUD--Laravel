@@ -12,12 +12,20 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
-Route::get('/siswa', 'Siswacontroller@index');
-Route::post('/siswa/create', 'Siswacontroller@create');
-Route::get('/siswa/{id}/edit', 'Siswacontroller@edit');
-Route::post('/siswa/{id}/ubah', 'Siswacontroller@ubah');
-Route::get('/siswa/{id}/hapus', 'Siswacontroller@hapus');
+Route::post('/postlogin', 'authcontroller@postlogin');
+Route::get('/login', 'authcontroller@login')->name('login');
+Route::get('/logout', 'authcontroller@logout');
+
+Route::group(['middleware' => 'auth'], function () {
+
+    Route::get('/dashboard', 'dasboardcontroller@index');
+    Route::get('/siswa', 'Siswacontroller@index');
+    Route::post('/siswa/create', 'Siswacontroller@create');
+    Route::get('/siswa/{id}/edit', 'Siswacontroller@edit');
+    Route::post('/siswa/{id}/ubah', 'Siswacontroller@ubah');
+    Route::get('/siswa/{id}/hapus', 'Siswacontroller@hapus');
+});
 
