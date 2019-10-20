@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+
 
 Route::post('/postlogin', 'authcontroller@postlogin');
 Route::get('/login', 'authcontroller@login')->name('login');
@@ -21,7 +19,7 @@ Route::get('/logout', 'authcontroller@logout');
 
 Route::group(['middleware' => 'auth'], function () {
 
-    Route::get('/dashboard', 'dasboardcontroller@index');
+    Route::get('/', 'dasboardcontroller@index');
     Route::get('/siswa', 'Siswacontroller@index');
     Route::post('/siswa/create', 'Siswacontroller@create');
     Route::get('/siswa/{id}/edit', 'Siswacontroller@edit');
